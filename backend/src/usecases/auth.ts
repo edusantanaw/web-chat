@@ -8,7 +8,11 @@ type IAuthUsecaseDependeces = {
     tokenGenerator: ITokenGeneratory
 }
 
-export default function authUsecase({ userRepository, encrypter, tokenGenerator }: IAuthUsecaseDependeces) {
+export default function authUsecase({
+    userRepository,
+    encrypter,
+    tokenGenerator
+}: IAuthUsecaseDependeces) {
     return async (username: string, password: string) => {
         const user = await userRepository.findByUsername(username)
         if (!user) throw "Usuario não existe!"
