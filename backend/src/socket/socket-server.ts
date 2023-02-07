@@ -1,4 +1,4 @@
-import {Server} from 'http'
+import { Server } from 'http'
 import socket from 'socket.io'
 
 export default (server: Server) => {
@@ -9,7 +9,17 @@ export default (server: Server) => {
         }
     })
 
-    io.on("connect", (socket)=> {
-            console.log(socket.id)
+    io.on("connect", (socket) => {
+        console.log(socket.id)
+        const id = socket.id
+        socket.on("disconnect", () => {
+            console.log(`User disconnected: ${id}`)
+        })
+
+        socket.on("ola", (data)=> {
+            console.log(data)
+        })
     })
+
+
 }
