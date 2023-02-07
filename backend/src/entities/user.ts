@@ -1,5 +1,5 @@
 export type IUser = {
-    id: string
+    _id: string
     username: string;
     password: string;
     perfilPhoto: string;

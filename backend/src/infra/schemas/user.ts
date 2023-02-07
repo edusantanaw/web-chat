@@ -15,6 +15,9 @@ const User = mongoose.model(
         },
         perfilPhoto: {
             type: String
+        },
+        bio: {
+            type: String
         }
     })
 )
