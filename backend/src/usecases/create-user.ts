@@ -14,7 +14,7 @@ export default function createUserUsecase({ userRepository, encrypter, tokenGene
     return async (data: data) => {
         const verifyUsername = await userRepository.findByUsername(data.username)
         if (verifyUsername) throw "Username já existe!"
-        const hashedPassword = await encrypter.genHah(data.password)
+        const hashedPassword = await encrypter.genHash(data.password)
         const user = await userRepository.create({ username: data.username, password: hashedPassword })
         const accessToken = tokenGenerator(user._id)
         return { user, accessToken }

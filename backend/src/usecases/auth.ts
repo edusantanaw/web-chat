@@ -14,7 +14,7 @@ export default function authUsecase({ userRepository, encrypter, tokenGenerator 
         if (!user) throw "Usuario não existe!"
         const validPassword = await encrypter.compare(password, user.password)
         if (!validPassword) throw "Senha invalida!"
-        const accessToken = tokenGenerator(user.id)
+        const accessToken = tokenGenerator(user._id)
         return { accessToken, user }
     }
 }
