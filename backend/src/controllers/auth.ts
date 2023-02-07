@@ -1,18 +1,9 @@
 import { badRequest, server, success } from "../helpers/http-response";
+import { IAuth } from "../protocols/usecases/auth";
 
 type data = {
     username: string;
     password: string;
-}
-
-type IUser = {
-    id: string
-    username: string;
-    password: string;
-}
-
-interface IAuth {
-    authUsecase: (username: string, password: string) => Promise<{ accessToken: string, user: IUser }>
 }
 
 export default function authController({ authUsecase }: IAuth) {
