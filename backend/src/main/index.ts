@@ -3,12 +3,18 @@ import { createServer } from 'http'
 import socketServer from '../socket/socket-server'
 import routes from './config/routes'
 import database from './../infra/db/mongo'
+import cors from 'cors'
+
+const origin = "*"
 
 class Server {
     Port = 3000
     app: Express = express()
-    
     middlewares(){
+        this.app.use(cors({
+            credentials: true,
+            origin
+        }))
         this.app.use(express.urlencoded({extended: true}))
         this.app.use(express.json())        
     }
