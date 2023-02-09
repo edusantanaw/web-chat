@@ -1,8 +1,11 @@
 import { Schema } from 'mongoose'
-import mongoose from '../db/mongo'
+import mongoose from 'mongoose'
+
+
+const modelName = 'user'
 
 const User = mongoose.model(
-    "user", 
+    modelName, 
     new Schema({
         username: {
             required: true,

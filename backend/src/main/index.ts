@@ -1,27 +1,32 @@
-import express from 'express'
+import express, {Express} from 'express'
 import { createServer } from 'http'
-import socket from 'socket.io'
+import socketServer from '../socket/socket-server'
+import routes from './config/routes'
+import database from './../infra/db/mongo'
 
-const Port = 3000
-
-const app = express()
-const server = createServer(app)
-const io = new socket.Server(server, {
-    cors: {
-        origin: "*",
-        methods: "*"
+class Server {
+    Port = 3000
+    app: Express = express()
+    
+    middlewares(){
+        this.app.use(express.urlencoded({extended: true}))
+        this.app.use(express.json())        
     }
-})
 
-io.on("connect", (socket) => {
-    console.log(socket.id)
-    const id = socket.id
-    socket.on("disconnect", () => {
-        console.log(`User disconnected: ${id}`)
-    })
-    socket.on("ola", (data)=> {
-        console.log(data)
-    })
-})
+    async bootstrap(){
+        const server = createServer(this.app)
+        this.middlewares()
+        socketServer(server)
+        routes(this.app)
+        // await database()
+        this.start()
+    }
 
-app.listen(Port, () => console.log(`Server running at ${Port}`))
+    start(){
+            const port = this.Port
+            const cb = ()=> console.log(`Server runnin at ${port}`)
+            this.app.listen(port, cb)
+    }
+}
+const server = new Server()
+server.bootstrap()

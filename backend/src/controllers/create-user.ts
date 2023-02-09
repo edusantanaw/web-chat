@@ -2,8 +2,6 @@ import { IUser } from "../entities/user";
 import { badRequest, server, success } from "../helpers/http-response";
 import { data } from "../protocols/utils/create-user";
 
-
-
 interface ICreateUserControllerDependeces {
     createUserUsecase: (data: data) => Promise<{ accessToken: string, user: IUser }>
 }

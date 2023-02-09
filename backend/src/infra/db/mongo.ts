@@ -1,12 +1,14 @@
 import mongoose from 'mongoose'
 
-async function db() {
-    const db = await mongoose.connect("mongodb://localhost/webchat")
-    console.log("mongodb started")
-    return db
+const connectionString = "mongodb://localhost/webchat"
 
+function db() {
+    try {
+        const db = mongoose.connect(connectionString)
+        return db
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-const database = await db()
-
-export default database
+export default db
