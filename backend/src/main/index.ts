@@ -24,7 +24,7 @@ class Server {
 
     start(){
             const port = this.Port
-            const cb = ()=> console.log(`Server runnin at ${port}`)
+            const cb = () => console.log(`Server runnin at ${port}`)
             this.app.listen(port, cb)
     }
 }
