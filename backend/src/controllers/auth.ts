@@ -1,4 +1,4 @@
-import { badRequest, server, success } from "../helpers/http-response";
+import { badRequest, exception, success } from "../helpers/http-response";
 import { IAuth } from "../protocols/usecases/auth";
 
 type data = {
@@ -14,7 +14,7 @@ export default function authController({ authUsecase }: IAuth) {
             const { accessToken, user } = await authUsecase(username, password)
             return success({ accessToken, user })
         } catch (error) {
-            return server(error)
+            return exception(error)
         }
     }
 }

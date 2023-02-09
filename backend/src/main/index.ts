@@ -2,15 +2,16 @@ import express, {Express} from 'express'
 import { createServer } from 'http'
 import socketServer from '../socket/socket-server'
 import routes from './config/routes'
-import database from './../infra/db/mongo'
+import database from '../infra/db/mongo'
 import cors from 'cors'
 
 const origin = "*"
 
 class Server {
-    Port = 3000
-    app: Express = express()
-    middlewares(){
+    private Port = 3000
+    private app: Express = express()
+
+    private middlewares(){
         this.app.use(cors({
             credentials: true,
             origin
@@ -19,18 +20,18 @@ class Server {
         this.app.use(express.json())        
     }
 
-    async bootstrap(){
-        const server = createServer(this.app)
+   public async bootstrap(){
         this.middlewares()
+        const server = createServer(this.app)
         socketServer(server)
         routes(this.app)
-        // await database()
+        await database()
         this.start()
     }
 
-    start(){
+    private start(){
             const port = this.Port
-            const cb = () => console.log(`Server runnin at ${port}`)
+            const cb = () => console.log(`Server running at ${port}`)
             this.app.listen(port, cb)
     }
 }

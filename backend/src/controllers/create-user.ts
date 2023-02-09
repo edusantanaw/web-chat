@@ -1,5 +1,5 @@
 import { IUser } from "../entities/user";
-import { badRequest, server, success } from "../helpers/http-response";
+import { badRequest, exception, success } from "../helpers/http-response";
 import { data } from "../protocols/utils/create-user";
 
 interface ICreateUserControllerDependeces {
@@ -17,7 +17,7 @@ export default function createUserController({ createUserUsecase }: ICreateUserC
             const { accessToken, user } = await createUserUsecase(data)
             return success({ accessToken, user })
         } catch (error) {
-            return server(error)
+            return exception(error)
         }
     }
 

@@ -20,9 +20,9 @@ function noContent(data: unknown){
     }
 }
 
-function server(message: unknown){
+function exception(message: unknown){
     return {
-        statusCode: 500,
+        statusCode: 400,
         body: message
     }
 }
@@ -37,7 +37,7 @@ function unathorized(message: unknown){
 export  {
     badRequest,
     success,
-    server,
+    exception,
     unathorized,
     noContent
 }

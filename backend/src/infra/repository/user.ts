@@ -14,4 +14,12 @@ export class UserRepository implements IUserRepository {
         if(!user) return null
         return user as any as IUser
     };
+
+    async searchByUsername(username: string){
+        const users = await User.find({
+            username: { $regex: '.*' + username + '.*' }
+        })
+        if(users.length === 0) return null
+        return users as any as IUser[] 
+    }
 }

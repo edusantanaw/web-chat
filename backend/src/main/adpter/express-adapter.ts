@@ -1,6 +1,10 @@
 import {Request, Response} from 'express'
 
-type controller = (data: any) => Promise<{statusCode: number, body: unknown}>
+type httpReponse = {
+    statusCode: number 
+    body: unknown
+}
+type controller = (data: any) => Promise<httpReponse>
 
 export default function adapter(controller: controller){
     return  async (req: Request, res: Response) =>{
