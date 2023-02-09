@@ -15,7 +15,7 @@ export class UserRepository implements IUserRepository {
         return user as any as IUser
     };
 
-    async searchByUsername(username: string){
+    async searchByUsername(username: string): Promise<IUser[] | null>{
         const users = await User.find({
             username: { $regex: '.*' + username + '.*' }
         })
