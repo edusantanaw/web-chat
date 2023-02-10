@@ -1,3 +1,4 @@
+import { unauthorized } from "../helpers/http-response";
 import { IEncrypter } from "../protocols/helpers/encrypter";
 import { ITokenGeneratory } from "../protocols/helpers/tokenGenerator";
 import { IUserRepository } from "../protocols/repository/user";
@@ -15,9 +16,9 @@ export default function authUsecase({
 }: IAuthUsecaseDependeces) {
     return async (username: string, password: string) => {
         const user = await userRepository.findByUsername(username)
-        if (!user) throw "Usuario não existe!"
+        if (!user) throw unauthorized("Usuario não existe!")
         const validPassword = await encrypter.compare(password, user.password)
-        if (!validPassword) throw "Senha invalida!"
+        if (!validPassword) throw unauthorized("Senha invalida!")
         const accessToken = tokenGenerator(user._id)
         return { accessToken, user }
     }

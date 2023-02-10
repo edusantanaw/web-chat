@@ -2,8 +2,9 @@ import {
     badRequest,
     exception,
     noContent,
-    success
+    ok
 } from "../helpers/http-response"
+import { exceptionError } from "../protocols/helpers/exception"
 import { IUserRepository } from "../protocols/repository/user"
 
 
@@ -13,9 +14,9 @@ export function searchUserController(userRepository: IUserRepository) {
             if (!username) return badRequest("O username é necessario!")
             const users = await userRepository.findByUsername(username)
             if (!users) return noContent("username")
-            return success(users)
+            return ok(users)
         } catch (error) {
-            return exception(error)
-        }
+            return exception(error as exceptionError)
+        } 
     }
 }

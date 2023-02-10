@@ -1,5 +1,6 @@
 import { IUser } from "../entities/user";
-import { badRequest, exception, success } from "../helpers/http-response";
+import { badRequest, exception, created } from "../helpers/http-response";
+import { exceptionError } from "../protocols/helpers/exception";
 import { data } from "../protocols/utils/create-user";
 
 interface ICreateUserControllerDependeces {
@@ -23,9 +24,9 @@ export default function createUserController({
             if (password !== confirmPassword) 
                 return badRequest("As senhas não coecidem!")
             const { accessToken, user } = await createUserUsecase(data)
-            return success({ accessToken, user })
+            return created({ accessToken, user })
         } catch (error) {
-            return exception(error)
+            return exception(error as exceptionError)
         }
     }
 

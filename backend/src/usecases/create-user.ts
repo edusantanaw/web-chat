@@ -1,3 +1,4 @@
+import { badRequest } from "../helpers/http-response";
 import { IEncrypter } from "../protocols/helpers/encrypter";
 import { ITokenGeneratory } from "../protocols/helpers/tokenGenerator";
 import { IUserRepository } from "../protocols/repository/user";
@@ -18,7 +19,7 @@ export default function createUserUsecase({
     return async (data: data) => {
         const verifyUsername =
            await userRepository.findByUsername(data.username)
-        if (verifyUsername) throw "Username já existe!"
+        if (verifyUsername) throw badRequest("Username já existe!")
         const hashedPassword = await encrypter.genHash(data.password)
         const user =
          await userRepository.create({ username: data.username, password: hashedPassword })

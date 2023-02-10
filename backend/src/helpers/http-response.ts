@@ -1,43 +1,57 @@
+import { exceptionError } from "../protocols/helpers/exception"
 
-function badRequest(message: unknown){
+function badRequest(message: unknown) {
     return {
         statusCode: 400,
         body: message
     }
 }
 
-function success(message: unknown){
+function ok(message: unknown) {
     return {
         statusCode: 200,
         body: message
     }
+
 }
 
-function noContent(data: unknown){
+function created(data: unknown) {
+    return {
+        statusCode: 201,
+        data: data
+    }
+}
+
+function noContent(data: unknown) {
     return {
         statusCode: 204,
         body: data
     }
 }
 
-function exception(message: unknown){
+function exception({
+    message,
+    statusCode
+}: exceptionError) {
+
     return {
-        statusCode: 400,
-        body: message
+        statusCode: statusCode ? statusCode : 500,
+        body: message ? message : "Internal server error"
     }
 }
 
-function unathorized(message: unknown){
+function unauthorized(message: unknown) {
     return {
         statusCode: 401,
         body: message
     }
 }
 
-export  {
+export {
     badRequest,
-    success,
+    ok,
     exception,
-    unathorized,
-    noContent
+    unauthorized,
+    noContent,
+    created
 }
