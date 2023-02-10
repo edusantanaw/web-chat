@@ -3,7 +3,6 @@ import { randomUUID } from 'node:crypto'
 import { IContact, IContactRepository } from "../../protocols/repository/contacts";
 
 export class ContactsRepository implements IContactRepository {
-
     async create(userId: string, contactId: string, room?: string) {
         const newContact = new Contacts({
             contactId: contactId,
