@@ -22,4 +22,9 @@ export class UserRepository implements IUserRepository {
         if(users.length === 0) return null
         return users as any as IUser[] 
     }
+
+    async findById (userId: string): Promise<IUser>{
+        const user = await User.findById(userId)
+        return user as any as IUser
+    }
 }
