@@ -20,6 +20,4 @@ export default (server: Server) => {
             console.log(data)
         })
     })
-
-
 }
