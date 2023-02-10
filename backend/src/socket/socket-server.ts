@@ -1,5 +1,6 @@
 import { Server } from 'http'
 import socket from 'socket.io'
+import { makeLoadRoomUsecase } from '../main/factory/usecase/loadRoom'
 
 export default (server: Server) => {
     const io = new socket.Server(server, {
@@ -16,8 +17,13 @@ export default (server: Server) => {
             console.log(`User disconnected: ${id}`)
         })
 
-        socket.on("ola", (data)=> {
-            console.log(data)
+        socket.on("join_room", async(data)=> {
+            const loadRoomUsecase = makeLoadRoomUsecase()
+                const room = await loadRoomUsecase(data)
+                if(room){
+                    socket.join(room)
+                }
         })
+
     })
 }
