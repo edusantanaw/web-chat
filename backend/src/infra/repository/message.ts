@@ -1,11 +1,8 @@
+import { message } from "../../entities/messages"
 import { Message } from "../schemas/message"
 
 
-type message = {
-    sender: string,
-    message: string,
-    toRoom: string
-}
+
 
 export class MessageRepository {
     async newMessage(data: message){
@@ -16,6 +13,7 @@ export class MessageRepository {
 
     async loadMessagesByRoom(room: string){
         const messages = await Message.find({toRoom: room})
+        if(messages.length === 0) return null
         return messages
     }
 }

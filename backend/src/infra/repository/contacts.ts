@@ -39,4 +39,5 @@ export class ContactsRepository implements IContactRepository {
         if(!contacts) return null
         return contacts as any as IContact[]
     }
+
 }
