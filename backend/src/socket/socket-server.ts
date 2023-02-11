@@ -24,6 +24,5 @@ export default (server: Server) => {
                     socket.join(room)
                 }
         })
-
     })
 }

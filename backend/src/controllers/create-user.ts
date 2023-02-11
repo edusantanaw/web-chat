@@ -29,5 +29,4 @@ export default function createUserController({
             return exception(error as exceptionError)
         }
     }
-
 }

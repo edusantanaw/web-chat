@@ -12,7 +12,6 @@ function ok(message: unknown) {
         statusCode: 200,
         body: message
     }
-
 }
 
 function created(data: unknown) {
