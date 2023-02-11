@@ -33,4 +33,10 @@ export class ContactsRepository implements IContactRepository {
         if (contact.length === 0) return null
         return contact[0] as any as IContact
     }
+
+    async loadContacts(userId: string){
+        const contacts = await Contacts.find({userId})
+        if(!contacts) return null
+        return contacts as any as IContact[]
+    }
 }

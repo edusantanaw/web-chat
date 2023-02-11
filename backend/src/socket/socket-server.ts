@@ -1,5 +1,6 @@
 import { Server } from 'http'
 import socket from 'socket.io'
+import { MessageRepository } from '../infra/repository/message'
 import { makeLoadRoomUsecase } from '../main/factory/usecase/loadRoom'
 
 export default (server: Server) => {
@@ -23,6 +24,12 @@ export default (server: Server) => {
                 if(room){
                     socket.join(room)
                 }
+        })
+
+        socket.on("send_message", async (data)=> {
+            const messageRepository = new MessageRepository()
+            const message = await messageRepository.newMessage(data)
+            socket.to(message.toRoom).emit("receive_message",message)
         })
     })
 }
