@@ -1,7 +1,5 @@
 import { message } from "../entities/messages"
 import { badRequest } from "../helpers/http-response"
-import { IContactRepository } from "../protocols/repository/contacts"
-
 
 type IMessagesRepository  = {
     newMessage: (data: message) => Promise<message>

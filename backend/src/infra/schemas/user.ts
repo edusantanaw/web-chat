@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 const modelName = 'user'
 
 const User = mongoose.model(
-    modelName, 
+    modelName,
     new Schema({
         username: {
             required: true,
@@ -25,4 +25,4 @@ const User = mongoose.model(
     })
 )
 
-export  {User}
+export { User }

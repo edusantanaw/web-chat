@@ -1,9 +1,6 @@
 import { message } from "../../entities/messages"
 import { Message } from "../schemas/message"
 
-
-
-
 export class MessageRepository {
     async newMessage(data: message){
         const newMessage =  new Message(data)

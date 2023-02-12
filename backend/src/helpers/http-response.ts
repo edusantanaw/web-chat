@@ -28,11 +28,8 @@ function noContent(data: unknown) {
     }
 }
 
-function exception({
-    message,
-    statusCode
-}: exceptionError) {
-
+function exception(data: exceptionError) {
+    const { message, statusCode } = data
     return {
         statusCode: statusCode ? statusCode : 500,
         body: message ? message : "Internal server error"

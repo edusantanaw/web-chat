@@ -7,13 +7,11 @@ const Contacts = mongoose.model(
     modelName,
     new Schema({
         userId: {
-            types: Schema.Types.ObjectId,
-            ref: "user._id",
+           type: String,
             required: true
         },
         contactId: {
-            types: Schema.Types.ObjectId,
-            ref: "user._id",
+           type: String,
             required: true
         },
         room: {
