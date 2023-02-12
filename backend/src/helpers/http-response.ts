@@ -17,7 +17,7 @@ function ok(message: unknown) {
 function created(data: unknown) {
     return {
         statusCode: 201,
-        data: data
+        body: data
     }
 }
 
